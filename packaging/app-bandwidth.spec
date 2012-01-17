@@ -1,10 +1,12 @@
 
 Name: app-bandwidth
+Group: ClearOS/Apps
 Version: 6.2.0.beta3
 Release: 1%{dist}
 Summary: Bandwidth Manager
 License: GPLv3
-Group: ClearOS/Apps
+Packager: ClearFoundation
+Vendor: ClearFoundation
 Source: %{name}-%{version}.tar.gz
 Buildarch: noarch
 Requires: %{name}-core = %{version}-%{release}
@@ -16,8 +18,8 @@ Bandwidth Manager is an essential tool for administrators who wish to implement 
 
 %package core
 Summary: Bandwidth Manager - APIs and install
-License: LGPLv3
 Group: ClearOS/Libraries
+License: LGPLv3
 Requires: app-base-core
 Requires: app-network-core
 Requires: app-firewall-core
