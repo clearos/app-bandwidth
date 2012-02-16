@@ -1,7 +1,7 @@
 
 Name: app-bandwidth
 Epoch: 1
-Version: 1.0.2
+Version: 1.0.4
 Release: 1%{dist}
 Summary: Bandwidth Manager
 License: GPLv3
@@ -13,7 +13,7 @@ Requires: app-base
 Requires: app-network
 
 %description
-Bandwidth Manager is an essential tool for administrators who wish to implement Quality of Service for services such as browsing, VoIP and SSH so that no one individual or application can adversely affect the performance of the entire network.
+Bandwidth Manager is an essential tool to manage the performance of the entire network.  You can ensure that services such as web browsing, VoIP, SSH and others are guaranteed enough bandwidth.
 
 %package core
 Summary: Bandwidth Manager - APIs and install
@@ -24,7 +24,7 @@ Requires: app-network-core
 Requires: app-firewall-core
 
 %description core
-Bandwidth Manager is an essential tool for administrators who wish to implement Quality of Service for services such as browsing, VoIP and SSH so that no one individual or application can adversely affect the performance of the entire network.
+Bandwidth Manager is an essential tool to manage the performance of the entire network.  You can ensure that services such as web browsing, VoIP, SSH and others are guaranteed enough bandwidth.
 
 This package provides the core API and libraries.
 
