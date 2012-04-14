@@ -1,7 +1,7 @@
 
 Name: app-bandwidth
 Epoch: 1
-Version: 1.0.10
+Version: 1.1.0
 Release: 1%{dist}
 Summary: Bandwidth Manager
 License: GPLv3
@@ -16,7 +16,7 @@ Requires: app-network
 Bandwidth Manager is an essential tool to manage the performance of the entire network.  You can ensure that services such as web browsing, VoIP, SSH and others are guaranteed enough bandwidth.
 
 %package core
-Summary: Bandwidth Manager - APIs and install
+Summary: Bandwidth Manager - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
