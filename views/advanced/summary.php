@@ -43,10 +43,10 @@ $this->lang->load('firewall');
 
 $headers = array(
     lang('firewall_nickname'),
+    lang('bandwidth_match_address'),
     lang('network_ip'),
+    lang('bandwidth_match_port'),
     lang('network_port'),
-    lang('bandwidth_rate'),
-    lang('bandwidth_ceiling'),
 );
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,25 +59,42 @@ $anchors = array(anchor_add('/app/bandwidth/advanced/add'));
 // Items
 ///////////////////////////////////////////////////////////////////////////////
 
+echo "<pre>";
+print_r($types);
+print_r($rules);
 foreach ($rules as $id => $details) {
-    $key = $details['name'];
+    $key = $details['wanif'] . '/' .
+        $details['address_type'] . '/' .
+        $details['port_type'] . '/' .
+        $details['host'] . '/' .
+        $details['port'] . '/' .
+        $details['priority'] . '/' .
+        $details['upstream'] . '/' .
+        $details['upstream_ceil'] . '/' .
+        $details['downstream'] . '/' .
+        $details['downstream_ceil'];
+
     $state = ($details['enabled']) ? 'disable' : 'enable';
     $state_anchor = 'anchor_' . $state;
+
+    $rate = (!empty($details['upstream'])) ? $details['upstream'] : $details['downstream'];
+    $address_type = (empty($details['host'])) ? '' : $types[$details['address_type']];
+    $port_type = (empty($details['port'])) ? '' : $types[$details['port_type']];
 
     $item['title'] = $details['name'];
     $item['action'] = '/app/bandwidth/advanced/delete/' . $key;
     $item['anchors'] = button_set(
         array(
             $state_anchor('/app/bandwidth/advanced/' . $state . '/' . $key, 'high'),
-            anchor_delete('/app/bandwidth/advanced/delete/' . $key . '/' . $details['service'] . '/' . $details['upstream'], 'low')
+            anchor_delete('/app/bandwidth/advanced/delete/' . $key, 'low')
         )
     );
     $item['details'] = array(
         $details['name'],
-        $details['ip'],
+        $address_type,
+        $details['host'],
+        $port_type,
         $details['port'],
-        $details['rate'],
-        $details['ceiling'],
     );
 
     $items[] = $item;

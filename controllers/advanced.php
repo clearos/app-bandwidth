@@ -7,7 +7,7 @@
  * @package    Bandwidth
  * @subpackage Controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -47,7 +47,7 @@ use \Exception as Exception;
  * @package    Bandwidth
  * @subpackage Controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -70,6 +70,7 @@ class Advanced extends ClearOS_Controller
 
         try {
             $data['rules'] = $this->bandwidth->get_bandwidth_rules(Bandwidth::TYPE_ADVANCED);
+            $data['types'] = $this->bandwidth->get_types();
         } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
@@ -233,12 +234,15 @@ class Advanced extends ClearOS_Controller
      * @return view
      */
 
-    function disable($name)
+    function disable($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil)
     {
+
         $this->load->library('bandwidth/Bandwidth');
 
         try {
-            $this->bandwidth->set_advanced_rule_state(FALSE, $name);
+            $this->bandwidth->set_advanced_rule_state(FALSE, $iface, $address_type, $port_type, $ip, 
+                $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil
+            );
 
             $this->page->set_status_disabled();
             redirect('/bandwidth/advanced');
@@ -256,12 +260,14 @@ class Advanced extends ClearOS_Controller
      * @return view
      */
 
-    function enable($name)
+    function enable($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil)
     {
         $this->load->library('bandwidth/Bandwidth');
 
         try {
-            $this->bandwidth->set_advanced_rule_state(TRUE, $name);
+            $this->bandwidth->set_advanced_rule_state(TRUE, $iface, $address_type, $port_type, $ip, 
+                $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil
+            );
 
             $this->page->set_status_enabled();
             redirect('/bandwidth/advanced');

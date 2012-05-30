@@ -7,7 +7,7 @@
  * @package    Bandwidth
  * @subpackage Controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -40,7 +40,7 @@
  * @package    Bandwidth
  * @subpackage Controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011 ClearFoundation
+ * @copyright  2011-2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -63,9 +63,7 @@ class Bandwidth extends ClearOS_Controller
         // Load views
         //-----------
 
-        // FIXME
-        // $views = array('bandwidth/ifaces', 'bandwidth/basic', 'bandwidth/advanced');
-        $views = array('bandwidth/ifaces', 'bandwidth/basic');
+        $views = array('bandwidth/ifaces', 'bandwidth/basic', 'bandwidth/advanced');
 
         $this->page->view_forms($views, lang('bandwidth_app_name'));
     }

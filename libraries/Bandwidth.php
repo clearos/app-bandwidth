@@ -7,7 +7,7 @@
  * @package    Bandwidth
  * @subpackage Libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2006-2011 ClearFoundation
+ * @copyright  2006-2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -91,7 +91,7 @@ clearos_load_library('base/Validation_Exception');
  * @package    Bandwidth
  * @subpackage Libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2006-2011 ClearFoundation
+ * @copyright  2006-2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -244,7 +244,7 @@ class Bandwidth extends Firewall
         $rule->set_parameter(
             sprintf(
                 '%s:%d:%d:%d:%d:%d:%d:%d',
-                $iface, $address, $port_type, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil
+                $iface, $address_type, $port_type, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil
             )
         );
 
@@ -709,7 +709,7 @@ class Bandwidth extends Firewall
 
         $this->delete_rule($rule);
 
-        if ($enabled)
+        if ($state)
             $rule->enable();
         else
             $rule->disable();
