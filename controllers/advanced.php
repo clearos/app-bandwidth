@@ -236,7 +236,6 @@ class Advanced extends ClearOS_Controller
 
     function disable($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil)
     {
-
         $this->load->library('bandwidth/Bandwidth');
 
         try {

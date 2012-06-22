@@ -59,15 +59,21 @@ $anchors = array(anchor_add('/app/bandwidth/advanced/add'));
 // Items
 ///////////////////////////////////////////////////////////////////////////////
 
+// FIXME
+/*
 echo "<pre>";
 print_r($types);
 print_r($rules);
+*/
 foreach ($rules as $id => $details) {
+    $port = empty($details['port']) ? '0' : $details['port'];
+    $host = empty($details['host']) ? '0' : $details['host'];
+
     $key = $details['wanif'] . '/' .
         $details['address_type'] . '/' .
         $details['port_type'] . '/' .
-        $details['host'] . '/' .
-        $details['port'] . '/' .
+        $host . '/' .
+        $port . '/' .
         $details['priority'] . '/' .
         $details['upstream'] . '/' .
         $details['upstream_ceil'] . '/' .
