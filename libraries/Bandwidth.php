@@ -771,6 +771,9 @@ class Bandwidth extends Firewall
         $this->config['BANDWIDTH_QOS'] = $state;
 
         $this->_save_configuration();
+
+        $firewall = new Firewall();
+        $firewall->reset();
     }
 
     /**
