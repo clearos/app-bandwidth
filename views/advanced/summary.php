@@ -78,7 +78,8 @@ foreach ($rules as $id => $details) {
         $details['upstream'] . '/' .
         $details['upstream_ceil'] . '/' .
         $details['downstream'] . '/' .
-        $details['downstream_ceil'];
+        $details['downstream_ceil'] . '/' .
+        $details['name'];
 
     $state = ($details['enabled']) ? 'disable' : 'enable';
     $state_anchor = 'anchor_' . $state;

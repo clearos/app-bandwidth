@@ -105,7 +105,7 @@ class Advanced extends ClearOS_Controller
         $this->form_validation->set_policy('iface', 'bandwidth/Bandwidth', 'validate_interface', TRUE);
 
         $this->form_validation->set_policy('address_type', 'bandwidth/Bandwidth', 'validate_type');
-        $this->form_validation->set_policy('address', 'bandwidth/Bandwidth', 'validate_address');
+        $this->form_validation->set_policy('address', 'bandwidth/Bandwidth', 'validate_address', TRUE);
 
         $this->form_validation->set_policy('port_type', 'bandwidth/Bandwidth', 'validate_type');
         $this->form_validation->set_policy('port', 'bandwidth/Bandwidth', 'validate_port');
@@ -186,13 +186,24 @@ class Advanced extends ClearOS_Controller
      * @return view
      */
 
-    function delete($name, $service, $rate)
+    function delete($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil, $nickname)
     {
         $this->lang->load('bandwidth');
 
-        $confirm_uri = '/app/bandwidth/advanced/destroy/' . $name;
+        $confirm_uri = '/app/bandwidth/advanced/destroy/' . 
+            $iface . '/' . 
+            $address_type . '/' . 
+            $port_type . '/' . 
+            $ip . '/' .
+            $port . '/' .
+            $priority . '/' .
+            $upstream . '/' . 
+            $upstream_ceil . '/' .
+            $downstream . '/' .
+            $downstream_ceil
+        ;
         $cancel_uri = '/app/bandwidth/advanced';
-        $items = array("$service - $rate " . lang('bandwidth_kilobits_s'));
+        $items = array("$nickname");
 
         $this->page->view_confirm_delete($confirm_uri, $cancel_uri, $items);
     }
@@ -205,7 +216,7 @@ class Advanced extends ClearOS_Controller
      * @return view
      */
 
-    function destroy($name)
+    function destroy($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil)
     {
         // Load libraries
         //---------------
@@ -216,7 +227,7 @@ class Advanced extends ClearOS_Controller
         //-------------------
 
         try {
-            $this->bandwidth->delete_advanced_rule($name);
+            $this->bandwidth->delete_advanced_rule($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil);
 
             $this->page->set_status_deleted();
             redirect('/bandwidth/advanced');
