@@ -38,6 +38,7 @@ $lang['bandwidth_reserve'] = 'Reserve';
 $lang['bandwidth_rule'] = 'Rule';
 $lang['bandwidth_service'] = 'Service';
 $lang['bandwidth_source'] = 'Source';
+$lang['bandwidth_tooltip_description'] = 'If you would like to find out your real world bandwidth speeds, please check the User Guide for speed test tools.';
 $lang['bandwidth_type_invalid'] = 'Bandwidth type is invalid.';
 $lang['bandwidth_type'] = 'Type';
 $lang['bandwidth_upload_(kilobits_s)'] = 'Upload (kilobits/s)';
