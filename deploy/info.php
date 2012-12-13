@@ -53,3 +53,6 @@ $app['core_file_manifest'] = array(
     'bandwidth.conf'=> array('target' => '/etc/clearos/bandwidth.conf'),
 );
 
+$app['delete_dependency'] = array(
+    'app-bandwidth-core'
+);
