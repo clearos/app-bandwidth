@@ -248,7 +248,7 @@ class Bandwidth extends Firewall
             )
         );
 
-        $this->add_rule($rule);
+        $this->_add_rule($rule);
     }
 
     /**
@@ -276,13 +276,11 @@ class Bandwidth extends Firewall
 
         $flags = Rule::BANDWIDTH_RATE | Rule::BANDWIDTH_BASIC | Rule::ENABLED;
 
-        $name = sprintf('bw_basic_%s_%c%c%c%c%c',
+        $name = sprintf(
+            'bw_basic_%s_%c%c%c%c%c',
             preg_replace('/\//', '', strtolower($service)),
-            97 + rand() % 26,
-            65 + rand() % 26,
-            48 + rand() % 10,
-            48 + rand() % 10,
-            65 + rand() % 26);
+            97 + rand() % 26, 65 + rand() % 26, 48 + rand() % 10, 48 + rand() % 10, 65 + rand() % 26
+        );
 
         if ($mode == self::MODE_LIMIT)
             $ceil = $rate;
@@ -325,7 +323,7 @@ class Bandwidth extends Firewall
         // external interface.
         $ifm = new Iface_Manager();
         $ext_iflist = $ifm->get_external_interfaces();
-        $ports = $this->get_ports_list();
+        $ports = $this->_get_ports_list();
 
         foreach ($ports as $port_info) {
 
@@ -344,7 +342,7 @@ class Bandwidth extends Firewall
                         )
                     );
 
-                    $this->add_rule($rule);
+                    $this->_add_rule($rule);
                 }
             }
         }
@@ -363,7 +361,7 @@ class Bandwidth extends Firewall
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        $rules = $this->get_rules();
+        $rules = $this->_get_rules();
 
         foreach ($rules as $rule) {
             if (!($rule->get_flags() & Rule::BANDWIDTH_RATE) || !($rule->get_flags() & Rule::BANDWIDTH_BASIC))
@@ -372,12 +370,12 @@ class Bandwidth extends Firewall
             if (strcmp($rule->get_name(), $name))
                 continue;
 
-            $this->delete_rule($rule);
+            $this->_delete_rule($rule);
         }
     }
 
     /**
-     * Delete an existing bandwidth rule.
+     * Deletes an existing bandwidth rule.
      *
      * @param string  $iface           external interface
      * @param string  $address_type    address type: 0 destination, 1 source
@@ -415,7 +413,7 @@ class Bandwidth extends Firewall
             )
         );
 
-        $this->delete_rule($rule);
+        $this->_delete_rule($rule);
     }
 
     /**
@@ -498,7 +496,7 @@ class Bandwidth extends Firewall
 
         $entries = array();
 
-        $rules = $this->get_rules();
+        $rules = $this->_get_rules();
 
         foreach ($rules as $rule) {
             if (!($rule->get_flags() & Rule::BANDWIDTH_RATE))
@@ -510,7 +508,7 @@ class Bandwidth extends Firewall
             $info['type'] = ($rule->get_flags() & Rule::BANDWIDTH_BASIC) ? self::TYPE_BASIC : self::TYPE_ADVANCED;
             $info['host'] = $rule->get_address();
             $info['port'] = $rule->get_port();
-            $info['service'] = $this->lookup_service(self::PROTOCOL_TCP, $info['port']);
+            $info['service'] = $this->_lookup_service(self::PROTOCOL_TCP, $info['port']);
             list(
                 $info['wanif'],
                 $info['address_type'],
@@ -567,6 +565,8 @@ class Bandwidth extends Firewall
 
     /**
      * Returns network interface details.
+     *
+     * @param string $iface interface
      *
      * @return array information about network interfaces
      * @throws Engine_Exception
@@ -704,17 +704,17 @@ class Bandwidth extends Firewall
             )
         );
 
-        if (! ($rule = $this->find_rule($rule)))
+        if (! ($rule = $this->_find_rule($rule)))
             return;
 
-        $this->delete_rule($rule);
+        $this->_delete_rule($rule);
 
         if ($state)
             $rule->enable();
         else
             $rule->disable();
 
-        $this->add_rule($rule);
+        $this->_add_rule($rule);
     }
 
 
@@ -732,7 +732,7 @@ class Bandwidth extends Firewall
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        $rules = $this->get_rules();
+        $rules = $this->_get_rules();
 
         foreach ($rules as $rule) {
             if (!($rule->get_flags() & Rule::BANDWIDTH_RATE) || !($rule->get_flags() & Rule::BANDWIDTH_BASIC))
@@ -741,14 +741,14 @@ class Bandwidth extends Firewall
             if (strcmp($rule->get_name(), $name))
                 continue;
 
-            $this->delete_rule($rule);
+            $this->_delete_rule($rule);
 
             if ($state)
                 $rule->enable();
             else
                 $rule->disable();
 
-            $this->add_rule($rule);
+            $this->_add_rule($rule);
         }
     }
 
@@ -947,8 +947,9 @@ class Bandwidth extends Firewall
     {
         clearos_profile(__METHOD__, __LINE__);
 
-// FIXME
-return;
+        // FIXME
+        return;
+
         if (!preg_match("/^\d+$/", $rate))
             return lang('bandwidth_rate_invalid');
         else if (($rate > self::MAX_SPEED) || ($rate < self::MIN_SPEED))

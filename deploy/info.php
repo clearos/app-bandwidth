@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'bandwidth';
-$app['version'] = '1.2.0';
+$app['version'] = '1.4.15';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -41,7 +41,7 @@ $app['requires'] = array(
 
 $app['core_requires'] = array(
     'app-network-core',
-    'app-firewall-core',
+    'app-firewall-core >= 1:1.4.15',
 );
 
 $app['core_directory_manifest'] = array(
