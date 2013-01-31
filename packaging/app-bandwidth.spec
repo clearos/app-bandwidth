@@ -83,4 +83,4 @@ exit 0
 /usr/clearos/apps/bandwidth/deploy
 /usr/clearos/apps/bandwidth/language
 /usr/clearos/apps/bandwidth/libraries
-/etc/clearos/bandwidth.conf
+%config(noreplace) /etc/clearos/bandwidth.conf

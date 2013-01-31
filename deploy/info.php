@@ -50,7 +50,14 @@ $app['core_directory_manifest'] = array(
 );
 
 $app['core_file_manifest'] = array(
-    'bandwidth.conf'=> array('target' => '/etc/clearos/bandwidth.conf'),
+    'bandwidth.conf' => array(
+        'target' => '/etc/clearos/bandwidth.conf',
+        'mode' => '0644',
+        'owner' => 'root',
+        'group' => 'root',
+        'config' => TRUE,
+        'config_params' => 'noreplace',
+    ),
 );
 
 $app['delete_dependency'] = array(
