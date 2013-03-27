@@ -33,7 +33,9 @@
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
-use \clearos\apps\base\Daemon as Daemon;
+use \clearos\apps\base\Daemon as Daemon_Class;
+
+require clearos_app_base('base') . '/controllers/daemon.php';
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -51,8 +53,19 @@ use \clearos\apps\base\Daemon as Daemon;
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
 
-class Server extends ClearOS_Controller
+class Server extends Daemon
 {
+    /**
+     * Bandwidth constructor.
+     *
+     * @return view
+     */
+
+    function __construct()
+    {
+        parent::__construct('bandwidth', 'bandwidth');
+    }
+
     /**
      * Default controller.
      *
@@ -91,7 +104,7 @@ class Server extends ClearOS_Controller
 
         $this->load->library('bandwidth/Bandwidth');
 
-        $status['status'] = ($this->bandwidth->get_engine_state()) ? Daemon::STATUS_RUNNING : Daemon::STATUS_STOPPED;
+        $status['status'] = ($this->bandwidth->get_engine_state()) ? Daemon_Class::STATUS_RUNNING : Daemon_Class::STATUS_STOPPED;
 
         echo json_encode($status);
     }
