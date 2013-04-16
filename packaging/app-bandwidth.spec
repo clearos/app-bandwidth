@@ -1,7 +1,7 @@
 
 Name: app-bandwidth
 Epoch: 1
-Version: 1.4.31
+Version: 1.4.35
 Release: 1%{dist}
 Summary: Bandwidth Manager
 License: GPLv3
