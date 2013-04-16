@@ -59,12 +59,6 @@ $anchors = array(anchor_add('/app/bandwidth/advanced/add'));
 // Items
 ///////////////////////////////////////////////////////////////////////////////
 
-// FIXME
-/*
-echo "<pre>";
-print_r($types);
-print_r($rules);
-*/
 foreach ($rules as $id => $details) {
     $port = empty($details['port']) ? '0' : $details['port'];
     $host = empty($details['host']) ? '0' : $details['host'];

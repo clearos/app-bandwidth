@@ -42,3 +42,4 @@ $lang['bandwidth_tooltip_description'] = 'If you would like to find out your rea
 $lang['bandwidth_type'] = 'Type';
 $lang['bandwidth_type_invalid'] = 'Bandwidth type is invalid.';
 $lang['bandwidth_upload_(kilobits_s)'] = 'Upload (kilobits/s)';
+$lang['bandwidth_advanced_rules_unvailable_in_standalone'] = 'Advanced bandwidth rules are not applicable to systems in standalone mode.';

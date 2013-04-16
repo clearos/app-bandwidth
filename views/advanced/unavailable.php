@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Bandwidth controller.
+ * Bandwidth advanced rules view.
  *
- * @category   Apps
+ * @category   ClearOS
  * @package    Bandwidth
- * @subpackage Controllers
+ * @subpackage Views
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011-2012 ClearFoundation
+ * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
  */
@@ -25,46 +25,18 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.  
 //
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-// C L A S S
+// Load dependencies
 ///////////////////////////////////////////////////////////////////////////////
 
-/**
- * Bandwidth controller.
- *
- * @category   Apps
- * @package    Bandwidth
- * @subpackage Controllers
- * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2011-2012 ClearFoundation
- * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
- * @link       http://www.clearfoundation.com/docs/developer/apps/bandwidth/
- */
+$this->lang->load('bandwidth');
 
-class Bandwidth extends ClearOS_Controller
-{
-    /**
-     * Bandwidth summary view.
-     *
-     * @return view
-     */
+///////////////////////////////////////////////////////////////////////////////
+// Infobox
+///////////////////////////////////////////////////////////////////////////////
 
-    function index()
-    {
-        // Load libraries
-        //---------------
-
-        $this->lang->load('bandwidth');
-
-        // Load views
-        //-----------
-
-        $views = array('bandwidth/server', 'bandwidth/ifaces', 'bandwidth/basic', 'bandwidth/advanced');
-
-        $this->page->view_controllers($views, lang('bandwidth_app_name'));
-    }
-}
+echo infobox_highlight(lang('base_information'), lang('bandwidth_advanced_rules_unvailable_in_standalone'));

@@ -34,6 +34,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 use \clearos\apps\bandwidth\Bandwidth as Bandwidth;
+use \clearos\apps\network\Network as Network;
 use \Exception as Exception;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -62,8 +63,12 @@ class Advanced extends ClearOS_Controller
 
     function index()
     {
+        // Load libraries
+        //---------------
+
         $this->lang->load('bandwidth');
         $this->load->library('bandwidth/Bandwidth');
+        $this->load->library('network/Network');
 
         // Load view data
         //---------------
@@ -71,6 +76,7 @@ class Advanced extends ClearOS_Controller
         try {
             $data['rules'] = $this->bandwidth->get_bandwidth_rules(Bandwidth::TYPE_ADVANCED);
             $data['types'] = $this->bandwidth->get_types();
+            $mode = $this->network->get_mode();
         } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
@@ -79,7 +85,10 @@ class Advanced extends ClearOS_Controller
         // Load views
         //-----------
 
-        $this->page->view_form('bandwidth/advanced/summary', $data, lang('bandwidth_advanced_rules'));
+        if ($mode == Network::MODE_STANDALONE || $mode == Network::MODE_TRUSTED_STANDALONE)
+            $this->page->view_form('bandwidth/advanced/unavailable', $data, lang('bandwidth_advanced_rules'));
+        else
+            $this->page->view_form('bandwidth/advanced/summary', $data, lang('bandwidth_advanced_rules'));
     }
 
     /**

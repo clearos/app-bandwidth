@@ -947,7 +947,7 @@ class Bandwidth extends Firewall
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        // FIXME
+        // TODO
         return;
 
         if (!preg_match("/^\d+$/", $rate))
