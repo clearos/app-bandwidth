@@ -134,11 +134,14 @@ class Advanced extends ClearOS_Controller
                 $download_ceiling = 0;
                 $upload_rate = $this->input->post('rate');
                 $upload_ceiling = $this->input->post('ceiling');
+                // Doh.  The user guide had the meanings reversed.  Sorry.
+                $address_type = ($this->input->post('address_type') == 0) ? 1 : 0;
             } else {
                 $download_rate = $this->input->post('rate');
                 $download_ceiling = $this->input->post('ceiling');
                 $upload_rate = 0;
                 $upload_ceiling = 0;
+                $address_type = $this->input->post('address_type');
             }
 
             $address = ($this->input->post('address')) ? $this->input->post('address') : '';
@@ -147,7 +150,7 @@ class Advanced extends ClearOS_Controller
                 $this->bandwidth->add_advanced_rule(
                     $this->input->post('name'),
                     $this->input->post('iface'),
-                    $this->input->post('address_type'),
+                    $address_type,
                     $this->input->post('port_type'),
                     $address,
                     $this->input->post('port'),

@@ -78,6 +78,10 @@ foreach ($rules as $id => $details) {
     $state = ($details['enabled']) ? 'disable' : 'enable';
     $state_anchor = 'anchor_' . $state;
 
+    // Doh.  The user guide had the meanings reversed.  Sorry.
+    if (($details['upstream_ceil'] > 0) || ($details['upstream'] > 0))
+        $details['address_type'] = ($details['address_type'] == 0) ? 1 : 0;
+
     $rate = (!empty($details['upstream'])) ? $details['upstream'] : $details['downstream'];
     $address_type = (empty($details['host'])) ? '' : $types[$details['address_type']];
     $port_type = (empty($details['port'])) ? '' : $types[$details['port_type']];
