@@ -62,6 +62,7 @@ use \clearos\apps\firewall\Firewall as Firewall;
 use \clearos\apps\firewall\Rule as Rule;
 use \clearos\apps\network\Iface_Manager as Iface_Manager;
 use \clearos\apps\network\Network_Utils as Network_Utils;
+use \clearos\apps\network\Network as Network;
 
 clearos_load_library('bandwidth/Bandwidth');
 clearos_load_library('base/Configuration_File');
@@ -70,6 +71,7 @@ clearos_load_library('firewall/Firewall');
 clearos_load_library('firewall/Rule');
 clearos_load_library('network/Iface_Manager');
 clearos_load_library('network/Network_Utils');
+clearos_load_library('network/Network');
 
 // Exceptions
 //-----------
@@ -167,6 +169,11 @@ class Bandwidth extends Firewall
         $this->basic_directions = array(
             self::DIRECTION_FROM_NETWORK => lang('bandwidth_flowing_from_network'),
             self::DIRECTION_TO_NETWORK => lang('bandwidth_flowing_to_network'),
+            self::DIRECTION_FROM_SYSTEM => lang('bandwidth_flowing_from_system'),
+            self::DIRECTION_TO_SYSTEM => lang('bandwidth_flowing_to_system'),
+        );
+
+        $this->standalone_directions = array(
             self::DIRECTION_FROM_SYSTEM => lang('bandwidth_flowing_from_system'),
             self::DIRECTION_TO_SYSTEM => lang('bandwidth_flowing_to_system'),
         );
@@ -439,7 +446,13 @@ class Bandwidth extends Firewall
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        return $this->basic_directions;
+        $network = new Network();
+        $mode = $network->get_mode();
+
+        if ($mode == Network::MODE_STANDALONE || $mode == Network::MODE_TRUSTED_STANDALONE)
+            return $this->standalone_directions;
+        else
+            return $this->basic_directions;
     }
 
     /**
