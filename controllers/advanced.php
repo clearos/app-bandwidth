@@ -61,7 +61,7 @@ class Advanced extends ClearOS_Controller
      * @return view
      */
 
-    function index()
+    function index($detailed = '')
     {
         // Load libraries
         //---------------
@@ -76,6 +76,7 @@ class Advanced extends ClearOS_Controller
         try {
             $data['rules'] = $this->bandwidth->get_bandwidth_rules(Bandwidth::TYPE_ADVANCED);
             $data['types'] = $this->bandwidth->get_types();
+            $data['report_type'] = $detailed;
             $mode = $this->network->get_mode();
         } catch (Exception $e) {
             $this->page->view_exception($e);
@@ -85,10 +86,15 @@ class Advanced extends ClearOS_Controller
         // Load views
         //-----------
 
-        if ($mode == Network::MODE_STANDALONE || $mode == Network::MODE_TRUSTED_STANDALONE)
-            $this->page->view_form('bandwidth/advanced/unavailable', $data, lang('bandwidth_advanced_rules'));
+        if ($data['report_type'] === 'detailed')
+            $options['type'] = MY_Page::TYPE_REPORT;
         else
-            $this->page->view_form('bandwidth/advanced/summary', $data, lang('bandwidth_advanced_rules'));
+            $options = array();
+
+        if ($mode == Network::MODE_STANDALONE || $mode == Network::MODE_TRUSTED_STANDALONE)
+            $this->page->view_form('bandwidth/advanced/unavailable', $data, lang('bandwidth_advanced_rules'), $options);
+        else
+            $this->page->view_form('bandwidth/advanced/summary', $data, lang('bandwidth_advanced_rules'), $options);
     }
 
     /**
@@ -215,7 +221,15 @@ class Advanced extends ClearOS_Controller
             $downstream_ceil
         ;
         $cancel_uri = '/app/bandwidth/advanced';
-        $items = array("$nickname");
+
+        if (empty($ip))
+            $ip_port = '';
+        else
+            $ip_port = (empty($port)) ? " - $ip" : "- $ip:$port";
+
+        $ip_port = preg_replace('/_/', '/', $ip_port);
+
+        $items = array("$nickname $ip_port");
 
         $this->page->view_confirm_delete($confirm_uri, $cancel_uri, $items);
     }
@@ -239,6 +253,8 @@ class Advanced extends ClearOS_Controller
         //-------------------
 
         try {
+            $ip = preg_replace('/_/', '/', $ip);
+
             $this->bandwidth->delete_advanced_rule($iface, $address_type, $port_type, $ip, $port, $priority, $upstream, $upstream_ceil, $downstream, $downstream_ceil);
 
             $this->page->set_status_deleted();

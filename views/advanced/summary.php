@@ -41,19 +41,39 @@ $this->lang->load('firewall');
 // Headers
 ///////////////////////////////////////////////////////////////////////////////
 
-$headers = array(
-    lang('firewall_nickname'),
-    lang('bandwidth_match_address'),
-    lang('network_ip'),
-    lang('bandwidth_match_port'),
-    lang('network_port'),
-);
+if ($report_type === 'detailed') {
+    $headers = array(
+        lang('firewall_nickname'),
+        lang('bandwidth_match_address'),
+        lang('network_ip'),
+        lang('bandwidth_match_port'),
+        lang('network_port'),
+        lang('bandwidth_rate'),
+        lang('bandwidth_ceiling'),
+    );
+} else {
+    $headers = array(
+        lang('firewall_nickname'),
+        lang('network_ip'),
+        lang('network_port'),
+    );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Anchors 
 ///////////////////////////////////////////////////////////////////////////////
 
-$anchors = array(anchor_add('/app/bandwidth/advanced/add'));
+if ($report_type === 'detailed') {
+    $anchors = array(
+        anchor_cancel('/app/bandwidth/advanced'),
+        anchor_add('/app/bandwidth/advanced/add')
+    );
+} else {
+    $anchors = array(
+        anchor_custom('/app/bandwidth/advanced/index/detailed', lang('base_detailed_report')),
+        anchor_add('/app/bandwidth/advanced/add')
+    );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Items
@@ -61,7 +81,7 @@ $anchors = array(anchor_add('/app/bandwidth/advanced/add'));
 
 foreach ($rules as $id => $details) {
     $port = empty($details['port']) ? '0' : $details['port'];
-    $host = empty($details['host']) ? '0' : $details['host'];
+    $host = empty($details['host']) ? '0' : preg_replace('/\//', '_', $details['host']);
 
     $key = $details['wanif'] . '/' .
         $details['address_type'] . '/' .
@@ -83,6 +103,9 @@ foreach ($rules as $id => $details) {
         $details['address_type'] = ($details['address_type'] == 0) ? 1 : 0;
 
     $rate = (!empty($details['upstream'])) ? $details['upstream'] : $details['downstream'];
+    $rate = ($rate == 0) ? '' : $rate;
+    $ceiling = (!empty($details['upstream_ceil'])) ? $details['upstream_ceil'] : $details['downstream_ceil'];
+    $ceiling = ($ceiling == 0) ? '' : $ceiling;
     $address_type = (empty($details['host'])) ? '' : $types[$details['address_type']];
     $port_type = (empty($details['port'])) ? '' : $types[$details['port_type']];
 
@@ -94,13 +117,24 @@ foreach ($rules as $id => $details) {
             anchor_delete('/app/bandwidth/advanced/delete/' . $key, 'low')
         )
     );
-    $item['details'] = array(
-        $details['name'],
-        $address_type,
-        $details['host'],
-        $port_type,
-        $details['port'],
-    );
+
+    if ($report_type === 'detailed') {
+        $item['details'] = array(
+            $details['name'],
+            $address_type,
+            $details['host'],
+            $port_type,
+            $details['port'],
+            $rate,
+            $ceiling
+        );
+    } else {
+        $item['details'] = array(
+            $details['name'],
+            $details['host'],
+            $details['port'],
+        );
+    }
 
     $items[] = $item;
 }
