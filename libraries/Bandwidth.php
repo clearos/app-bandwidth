@@ -844,7 +844,7 @@ class Bandwidth extends Firewall
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        if (!(Network_Utils::is_valid_ip($address) || Network_Utils::is_valid_hostname($address) || Network_Utils::is_valid_network($address)))
+        if (!(Network_Utils::is_valid_ip($address) || Network_Utils::is_valid_network($address)))
             return lang('bandwidth_address_invalid');
     }
 

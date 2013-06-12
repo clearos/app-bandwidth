@@ -59,7 +59,7 @@ echo fieldset_footer();
 
 echo fieldset_header(lang('bandwidth_match_address'));
 echo field_dropdown('address_type', $types, $address_type, lang('bandwidth_type'));
-echo field_input('address', $address, lang('bandwidth_ip_or_hostname'));
+echo field_input('address', $address, lang('network_ip'));
 echo fieldset_footer();
 
 echo fieldset_header(lang('bandwidth_match_port'));
