@@ -5,6 +5,7 @@
 $lang['bandwidth_address_invalid'] = 'Address is invalid.';
 $lang['bandwidth_advanced_rule'] = 'Advanced Rule';
 $lang['bandwidth_advanced_rules'] = 'Advanced Rules';
+$lang['bandwidth_advanced_rules_unvailable_in_standalone'] = 'Advanced bandwidth rules are not applicable to systems in standalone mode.';
 $lang['bandwidth_app_description'] = 'Bandwidth Manager is an essential tool to manage the performance of the entire network.  You can ensure that services such as web browsing, VoIP, SSH and others are guaranteed enough bandwidth.';
 $lang['bandwidth_app_name'] = 'Bandwidth Manager';
 $lang['bandwidth_bandwidth'] = 'Bandwidth';

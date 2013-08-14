@@ -5,6 +5,7 @@
 $lang['bandwidth_address_invalid'] = 'Podany adres jest nieprawidłowy.';
 $lang['bandwidth_advanced_rule'] = 'Reguła zaawansowana';
 $lang['bandwidth_advanced_rules'] = 'Reguły zaawansowane';
+$lang['bandwidth_advanced_rules_unvailable_in_standalone'] = 'Advanced bandwidth rules are not applicable to systems in standalone mode.';
 $lang['bandwidth_app_description'] = 'Menadżer pasma jest podstawowym narzędziem do zarządzania wydajnością całej sieci.  Możesz zapewnić usługom takim jak przeglądanie internetu, VoIP, SSH i innym gwarancję wystarczającego pasma.';
 $lang['bandwidth_app_name'] = 'Menadżer pasma';
 $lang['bandwidth_bandwidth'] = 'Pasmo';

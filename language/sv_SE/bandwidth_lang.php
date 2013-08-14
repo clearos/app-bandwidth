@@ -5,6 +5,7 @@
 $lang['bandwidth_address_invalid'] = 'Adressen är ogiltig.';
 $lang['bandwidth_advanced_rule'] = 'Avancerade regel';
 $lang['bandwidth_advanced_rules'] = 'Avancerade regler';
+$lang['bandwidth_advanced_rules_unvailable_in_standalone'] = 'Advanced bandwidth rules are not applicable to systems in standalone mode.';
 $lang['bandwidth_app_description'] = 'Bandbreddshanteraren är ett viktigt verktyg för att hantera prestandan för hela nätverket.   Du kan göra så att tjänster som att surfa på nätet, VOIP, SSH och andra tjänster garanteras tillräcklig bandbredd.';
 $lang['bandwidth_app_name'] = 'Bandbreddshanteraren';
 $lang['bandwidth_bandwidth'] = 'Bandbredd';
