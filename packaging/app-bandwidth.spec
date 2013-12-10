@@ -1,7 +1,7 @@
 
 Name: app-bandwidth
 Epoch: 1
-Version: 1.5.0
+Version: 1.5.18
 Release: 1%{dist}
 Summary: Bandwidth Manager
 License: GPLv3
@@ -21,7 +21,7 @@ License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
 Requires: app-network-core
-Requires: app-firewall-core >= 1:1.4.15
+Requires: app-firewall-core >= 1:1.5.18
 
 %description core
 Bandwidth Manager is an essential tool to manage the performance of the entire network.  You can ensure that services such as web browsing, VoIP, SSH and others are guaranteed enough bandwidth.
@@ -76,7 +76,6 @@ exit 0
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/bandwidth/packaging
-%exclude /usr/clearos/apps/bandwidth/tests
 %dir /usr/clearos/apps/bandwidth
 %dir /var/clearos/bandwidth
 %dir /var/clearos/bandwidth/backup/

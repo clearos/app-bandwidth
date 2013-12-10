@@ -522,6 +522,9 @@ class Bandwidth extends Firewall
             $info['host'] = $rule->get_address();
             $info['port'] = $rule->get_port();
             $info['service'] = $this->_lookup_service(self::PROTOCOL_TCP, $info['port']);
+            if (empty($info['service']))
+                $info['service'] = $this->_lookup_service(self::PROTOCOL_UDP, $info['port']);
+
             list(
                 $info['wanif'],
                 $info['address_type'],

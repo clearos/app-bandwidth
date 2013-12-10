@@ -132,7 +132,7 @@ class Basic extends ClearOS_Controller
 
         try {
             $data['modes'] = $this->bandwidth->get_modes();
-            $data['services'] = $this->bandwidth->get_standard_service_list();
+            $data['services'] = $this->bandwidth->get_standard_service_list('TCP');
             $data['protocols'] = $this->bandwidth->get_basic_protocols();
             $data['directions'] = $this->bandwidth->get_basic_directions();
             $data['priorities'] = $this->bandwidth->get_priorities();
