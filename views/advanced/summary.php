@@ -70,7 +70,7 @@ if ($report_type === 'detailed') {
     );
 } else {
     $anchors = array(
-        anchor_custom('/app/bandwidth/advanced/index/detailed', lang('base_detailed_report')),
+        anchor_custom('/app/bandwidth/advanced/index/detailed', lang('base_detailed_view')),
         anchor_add('/app/bandwidth/advanced/add')
     );
 }
