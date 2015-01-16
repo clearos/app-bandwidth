@@ -20,7 +20,7 @@ $app['tooltip'] = lang('bandwidth_tooltip_description');
 
 $app['name'] = lang('bandwidth_app_name');
 $app['category'] = lang('base_category_network');
-$app['subcategory'] = lang('base_subcategory_bandwidth_and_qos');
+$app['subcategory'] = lang('base_subcategory_bandwidth_control');
 
 /////////////////////////////////////////////////////////////////////////////
 // Controllers
